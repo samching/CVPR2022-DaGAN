@@ -55,7 +55,7 @@ def load_checkpoints(config_path, checkpoint_path, kp_num=15, generator='DepthAw
     return generator, kp_detector
 
 
-def make_animation(source_image, driving_video, generator, kp_detector, relative=True, adapt_movement_scale=True, cpu=False):
+def make_animation(source_image, driving_video, generator, kp_detector, depth_encoder, depth_decoder, relative=True, adapt_movement_scale=True, cpu=False):
     sources = []
     drivings = []
     with torch.no_grad():
