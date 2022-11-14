@@ -21,13 +21,13 @@ import cv2
 if sys.version_info[0] < 3:
     raise Exception("You must use Python 3 or higher. Recommended version is Python 3.7")
 
-def load_checkpoints(config_path, checkpoint_path, kp_num = 15, cpu=False):
+def load_checkpoints(config_path, checkpoint_path, kp_num=15, generator='DepthAwareGenerator', cpu=False):
 
     with open(config_path) as f:
         config = yaml.load(f)
     if kp_num != -1:
         config['model_params']['common_params']['num_kp'] = kp_num
-    generator = getattr(GEN, opt.generator)(**config['model_params']['generator_params'],**config['model_params']['common_params'])
+    generator = getattr(GEN, generator)(**config['model_params']['generator_params'],**config['model_params']['common_params'])
     if not cpu:
         generator.cuda()
     config['model_params']['common_params']['num_channels'] = 4
